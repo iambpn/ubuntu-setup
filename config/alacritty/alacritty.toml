@@ -1,6 +1,9 @@
 [env]
 TERM = "xterm-256color"
 
+[shell]
+program = "zellij"
+
 [terminal]
 osc52 = "CopyPaste"
 
@@ -20,7 +23,8 @@ opacity = 0.98
 bindings = [
 { key = "Insert", mods = "Shift", action = "Paste" },
 { key = "Insert", mods = "Control", action = "Copy" },
-{ key = "Return", mods = "Shift", chars = "\u001B\r" }
+{ key = "Return", mods = "Shift", chars = "\u000a" },
+{ key = "F11", action = "ToggleFullscreen" }
 ]
 
 # Tokyo Night colors (inlined from omabuntu's theme so this file is standalone).
