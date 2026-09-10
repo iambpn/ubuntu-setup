@@ -9,20 +9,15 @@ set -eEo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"  # link_config, fetch_and_run
+source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"  # link_config
 
 # --- Install starship ---------------------------------------------------
-# In apt from Ubuntu 23.10 on; fall back to the official installer if this
-# release doesn't carry it.
+# The apt package isn't in every Ubuntu release, so always use the official
+# installer. -y skips its confirmation prompt; it escalates with sudo itself
+# to write into /usr/local/bin.
 if ! command -v starship &>/dev/null; then
   echo "Installing starship..."
-  if apt-cache policy starship 2>/dev/null | grep -qE 'Candidate: [^(]'; then
-    sudo apt-get update -y
-    sudo apt-get install -y starship
-  else
-    echo "No apt package for this Ubuntu; using the official installer..."
-    fetch_and_run --sudo --sh https://starship.rs/install/install.sh --yes
-  fi
+  curl -sS https://starship.rs/install.sh | sh -s -- -y
 fi
 
 # --- Configs ----------------------------------------------------------
