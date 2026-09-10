@@ -33,6 +33,11 @@ add_custom_shortcut() {
   gsettings set "$key" binding "$4"
 }
 
+# Free up Super+V: a fresh GNOME binds it to "toggle-message-tray". Keep
+# Super+M for the tray and drop Super+V so it doesn't clash with the
+# Pufferfish shortcut added next.
+gsettings set org.gnome.shell.keybindings toggle-message-tray "['<Super>m']"
+
 add_custom_shortcut pufferfish 'Pufferfish' 'pufferfish --history' '<Super>v'
 add_custom_shortcut flameshot 'Flameshot' 'flameshot gui' '<Shift><Super>s'
 

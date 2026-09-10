@@ -36,6 +36,9 @@ for i in 1 2 3 4 5 6 7 8 9; do
   gsettings reset org.gnome.shell.keybindings "switch-to-application-$i" 2>/dev/null || true
 done
 
+# Restore the Super+V message-tray binding that hotkeys.sh cleared.
+gsettings reset org.gnome.shell.keybindings toggle-message-tray 2>/dev/null || true
+
 gsettings reset org.gnome.desktop.interface enable-hot-corners 2>/dev/null || true
 gsettings reset org.gnome.mutter dynamic-workspaces 2>/dev/null || true
 gsettings reset org.gnome.desktop.wm.preferences num-workspaces 2>/dev/null || true

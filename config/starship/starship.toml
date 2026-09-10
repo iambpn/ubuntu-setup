@@ -15,7 +15,6 @@ repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($r
 # Prefix the branch name with the git branch glyph so it reads as git info,
 # not a stray word. Needs a Nerd Font (Alacritty uses CaskaydiaMono Nerd Font).
 [git_branch]
-symbol = " "
 format = "[$symbol$branch]($style) "
 style = "italic red"
 
