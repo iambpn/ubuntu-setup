@@ -8,20 +8,7 @@ set -eEo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-
-link_config() {
-  # link_config <source in repo> <target under ~/.config>
-  local src="$REPO_DIR/config/$1"
-  local dst="$CONFIG_HOME/$2"
-
-  mkdir -p "$(dirname "$dst")"
-  if [[ -e $dst && ! -L $dst ]]; then
-    echo "Backing up existing $dst -> $dst.bak"
-    mv "$dst" "$dst.bak"
-  fi
-  ln -snf "$src" "$dst"
-  echo "Linked $dst -> $src"
-}
+source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"  # link_config
 
 # --- Alacritty ---------------------------------------------------------------
 if ! command -v alacritty &>/dev/null; then

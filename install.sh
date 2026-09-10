@@ -13,6 +13,7 @@ INSTALL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/install" && pwd)"
 scripts=(
   prerequisites.sh
   terminal.sh
+  shell.sh
   vscode.sh
   chrome.sh
   docker.sh

@@ -10,8 +10,9 @@ adapted from [omabuntu](../omabuntu).
 - `install/` — one script per tool. Each is safe to re-run and skips work
   that is already done. You can run any of them on their own.
 - `uninstall.sh` / `uninstall/` — the reverse, one script per tool.
-- `config/` — the actual config files (Alacritty, Zellij, GNOME
-  extensions and shortcuts). The install scripts symlink or apply these.
+- `config/` — the actual config files (Alacritty, Zellij, Starship, the
+  bash rc snippet, GNOME extensions and shortcuts). The install scripts
+  symlink or apply these.
 
 ## Usage
 

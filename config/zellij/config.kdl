@@ -8,6 +8,12 @@ theme "tokyo-night"
 default_mode "locked"
 on_force_close "quit"
 
+// Draw a full box around each pane. The default "titles" style only puts a
+// line above the pane and shows the pane cwd in the tab bar instead of
+// "Tab #N"; "full" keeps the tab labels and gives a real border.
+pane_frames true
+pane_frame_style "full"
+
 // omakub uses the slim single-line bar. Uncomment for that; leaving it off
 // keeps the fuller status bar with more visible key hints.
 // default_layout "compact"
