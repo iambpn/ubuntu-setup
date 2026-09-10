@@ -16,11 +16,19 @@ adapted from [omabuntu](../omabuntu).
 ## Usage
 
 ```sh
-./install.sh
+sudo -v && ./install.sh
 ```
 
-It needs `sudo` and takes a while. Log out and back in afterwards so the
-Docker group, GNOME extension changes, and shell profile edits take effect.
+Run it as your normal user, **not** with `sudo ./install.sh`. Each step
+that needs root calls `sudo` itself; running the whole script as root puts
+files in the wrong home and breaks the GNOME settings steps.
+
+`sudo -v` just caches your password up front so the run doesn't stop at the
+first prompt. You may still be asked again during a long run once the cache
+expires.
+
+It takes a while. Log out and back in afterwards so the Docker group, GNOME
+extension changes, and shell profile edits take effect.
 
 To remove things again:
 

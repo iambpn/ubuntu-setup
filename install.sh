@@ -11,6 +11,7 @@ set -uo pipefail
 INSTALL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/install" && pwd)"
 
 scripts=(
+  prerequisites.sh
   terminal.sh
   vscode.sh
   chrome.sh
