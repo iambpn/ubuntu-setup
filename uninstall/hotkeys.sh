@@ -36,6 +36,11 @@ for i in 1 2 3 4 5 6 7 8 9; do
   gsettings reset org.gnome.shell.keybindings "switch-to-application-$i" 2>/dev/null || true
 done
 
+gsettings reset org.gnome.desktop.interface enable-hot-corners 2>/dev/null || true
+gsettings reset org.gnome.mutter dynamic-workspaces 2>/dev/null || true
+gsettings reset org.gnome.desktop.wm.preferences num-workspaces 2>/dev/null || true
+gsettings reset org.gnome.mutter workspaces-only-on-primary 2>/dev/null || true
+
 MK="org.gnome.settings-daemon.plugins.media-keys"
 CB="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
 gsettings reset "$MK" logout 2>/dev/null || true

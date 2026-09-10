@@ -13,57 +13,60 @@ for ext in ding@rastersoft.com ubuntu-dock@ubuntu.com; do
   gnome-extensions disable "$ext" 2>/dev/null || true
 done
 
-# --- Drop the Snap Store and Web search providers -------------------
-# Same as unticking them in Settings > Search. Listing an id that isn't
-# installed is harmless, so no need to check first.
-disabled="$(gsettings get org.gnome.desktop.search-providers disabled)"
-for id in snap-store_snap-store.desktop io.snapcraft.Store.desktop org.gnome.Epiphany.desktop; do
-  if [[ $disabled != *"'$id'"* ]]; then
-    if [[ $disabled == "@as []" || $disabled == "[]" ]]; then
-      disabled="['$id']"
-    else
-      disabled="${disabled%]}, '$id']"
-    fi
-  fi
-done
-gsettings set org.gnome.desktop.search-providers disabled "$disabled"
+# Match against these as strings, not with `... | grep -q`: grep exits on the
+# first hit, the writer gets SIGPIPE, and `pipefail` then fails the pipe.
+schemas="$(gsettings list-schemas 2>/dev/null)" || schemas=""
 
-# gsettings can only set keys in a schema it can see. install/gnome-extensions.sh
-# copies each extension's schema into the system dir before calling this. If you
-# run this script on its own before that, skip the block instead of aborting
-# under `set -e`.
-has_schema() { gsettings list-schemas | grep -qx "$1"; }
+has_schema() {
+  [[ $'\n'"$schemas"$'\n' == *$'\n'"$1"$'\n'* ]]
+}
+
+# set_key <schema> <key> <value>: set it only if the schema still defines
+# that key, and don't let a rejected value stop the script. Extensions rename
+# and drop keys between versions.
+set_key() {
+  local schema="$1" key="$2" value="$3" keys
+  keys="$(gsettings list-keys "$schema" 2>/dev/null)" || keys=""
+  if [[ $'\n'"$keys"$'\n' != *$'\n'"$key"$'\n'* ]]; then
+    echo "  skip $schema $key: not in this version of the extension"
+    return 0
+  fi
+  gsettings set "$schema" "$key" "$value" 2>/dev/null \
+    || echo "  warn $schema $key: gsettings rejected '$value'"
+}
 
 # --- TopHat -------------------------------------------------------------
-if has_schema org.gnome.shell.extensions.tophat; then
+tophat=org.gnome.shell.extensions.tophat
+if has_schema "$tophat"; then
   # CPU as a percentage, memory as used GB, and the network meter on.
-  gsettings set org.gnome.shell.extensions.tophat show-cpu true
-  gsettings set org.gnome.shell.extensions.tophat cpu-display 'numeric'
-  gsettings set org.gnome.shell.extensions.tophat show-mem true
-  gsettings set org.gnome.shell.extensions.tophat mem-display 'numeric'
-  gsettings set org.gnome.shell.extensions.tophat mem-abs-units true
-  gsettings set org.gnome.shell.extensions.tophat show-net true
-  gsettings set org.gnome.shell.extensions.tophat network-usage-unit 'bytes'
+  set_key "$tophat" show-cpu true
+  set_key "$tophat" cpu-display 'numeric'
+  set_key "$tophat" show-mem true
+  set_key "$tophat" mem-display 'numeric'
+  set_key "$tophat" mem-abs-units true
+  set_key "$tophat" show-net true
+  set_key "$tophat" network-usage-unit 'bytes'
 else
   echo "TopHat schema not installed yet; skipping its settings."
 fi
 
 # --- Hide Top Bar -----------------------------------------------------
-if has_schema org.gnome.shell.extensions.hidetopbar; then
+hidetopbar=org.gnome.shell.extensions.hidetopbar
+if has_schema "$hidetopbar"; then
   # Intellihide: only hide the panel when a window (the active one) needs the space.
-  gsettings set org.gnome.shell.extensions.hidetopbar enable-intellihide true
-  gsettings set org.gnome.shell.extensions.hidetopbar enable-active-window true
+  set_key "$hidetopbar" enable-intellihide true
+  set_key "$hidetopbar" enable-active-window true
 
   # Sensitivity: reveal the panel on a mouse push to the top edge, keep the hot
   # corner alive while hidden, keep round corners, but don't open the overview.
-  gsettings set org.gnome.shell.extensions.hidetopbar mouse-sensitive true
-  gsettings set org.gnome.shell.extensions.hidetopbar mouse-sensitive-fullscreen-window true
-  gsettings set org.gnome.shell.extensions.hidetopbar show-in-overview true
-  gsettings set org.gnome.shell.extensions.hidetopbar hot-corner true
-  gsettings set org.gnome.shell.extensions.hidetopbar mouse-triggers-overview false
-  gsettings set org.gnome.shell.extensions.hidetopbar keep-round-corners true
-  gsettings set org.gnome.shell.extensions.hidetopbar pressure-threshold 100
-  gsettings set org.gnome.shell.extensions.hidetopbar pressure-timeout 1000
+  set_key "$hidetopbar" mouse-sensitive true
+  set_key "$hidetopbar" mouse-sensitive-fullscreen-window false
+  set_key "$hidetopbar" show-in-overview true
+  set_key "$hidetopbar" hot-corner true
+  set_key "$hidetopbar" mouse-triggers-overview false
+  set_key "$hidetopbar" keep-round-corners true
+  set_key "$hidetopbar" pressure-threshold 100
+  set_key "$hidetopbar" pressure-timeout 1000
 else
   echo "Hide Top Bar schema not installed yet; skipping its settings."
 fi

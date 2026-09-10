@@ -56,6 +56,12 @@ gsettings set $WM switch-group "@as []"
 gsettings set $WM switch-group-backward "@as []"
 gsettings set $WM switch-input-source "@as []"
 
+# --- Workspaces and desktop behaviour --------------------------------
+gsettings set org.gnome.desktop.interface enable-hot-corners true
+gsettings set org.gnome.mutter dynamic-workspaces false
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 6
+gsettings set org.gnome.mutter workspaces-only-on-primary false
+
 # --- GNOME Shell ----------------------------------------------------
 SHELL_KB="org.gnome.shell.keybindings"
 for i in 1 2 3 4 5 6 7 8 9; do

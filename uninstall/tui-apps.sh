@@ -12,7 +12,7 @@ sudo rm -f /usr/local/bin/lazygit
 
 rm -f "$APPS"/btop.desktop "$APPS"/lazygit.desktop "$APPS"/lazydocker.desktop
 rm -f "$APPS"/icons/lazygit.png "$APPS"/icons/lazydocker.png
-rm -rf "$HOME/.config/lazygit"
+rm -rf "$HOME/.config/lazygit" "$HOME/.config/btop"
 
 update-desktop-database "$APPS" 2>/dev/null || true
 

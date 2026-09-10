@@ -14,6 +14,18 @@ mkdir -p "$ICONS"
 sudo apt-get update -y
 sudo apt-get install -y btop
 
+# Theme: Tokyo Night. btop ships this theme, so we only set the key in its
+# config (creating the file if btop hasn't run yet). btop rewrites this file
+# on exit, so linking it from the repo isn't a good fit.
+BTOP_CONF="$HOME/.config/btop/btop.conf"
+mkdir -p "$(dirname "$BTOP_CONF")"
+touch "$BTOP_CONF"
+if grep -q '^color_theme' "$BTOP_CONF"; then
+  sed -i 's/^color_theme.*/color_theme = "tokyo-night"/' "$BTOP_CONF"
+else
+  echo 'color_theme = "tokyo-night"' >>"$BTOP_CONF"
+fi
+
 # --- lazygit (GitHub release binary; not in apt) --------------------
 if ! command -v lazygit &>/dev/null; then
   echo "Installing lazygit..."
