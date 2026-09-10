@@ -11,10 +11,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 # --- Install ------------------------------------------------------------
 if ! command -v pufferfish &>/dev/null; then
   echo "Installing Pufferfish..."
-  # The official installer builds and drops the binary in /usr/local/bin
-  # and adds a login autostart entry. It needs `make` and `tar`. It's a
-  # /bin/sh script and runs as root, hence --sh --sudo. fetch_and_run runs
-  # it from a file so any prompt reaches your terminal.
+  # /bin/sh installer, runs as root, needs make + tar.
   sudo apt-get update -y
   sudo apt-get install -y make
   fetch_and_run --sudo --sh https://raw.githubusercontent.com/iambpn/pufferfish/main/install.sh

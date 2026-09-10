@@ -12,6 +12,9 @@ if ! command -v localsend_app &>/dev/null; then
     | grep -oP '"browser_download_url":\s*"\K[^"]*linux-x86-64\.deb')"
   tmp="$(mktemp -d)"
   curl -fsSL -o "$tmp/localsend.deb" "$url"
+  # let apt's `_apt` user read the file (mktemp -d is 0700).
+  chmod 0755 "$tmp"
+  chmod 0644 "$tmp/localsend.deb"
   sudo apt-get install -y "$tmp/localsend.deb"
   rm -rf "$tmp"
 fi

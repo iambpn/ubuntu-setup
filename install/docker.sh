@@ -17,9 +17,16 @@ if ! command -v docker &>/dev/null; then
   sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 fi
 
-sudo systemctl enable --now docker
+# docker.socket fails to start without the `docker` group, and a reinstall
+# doesn't always recreate it.
+getent group docker >/dev/null || sudo groupadd docker
 
-# Run docker without sudo. Needs a fresh login to take effect.
+sudo systemctl enable docker
+if ! sudo systemctl start docker; then
+  echo "Note: docker did not start right now. It is enabled and will start" \
+       "on the next boot, or run 'sudo systemctl start docker' again."
+fi
+
 if ! id -nG "$USER" | tr ' ' '\n' | grep -qx docker; then
   sudo usermod -aG docker "$USER"
   echo "Added $USER to the docker group. Log out and back in for it to apply."

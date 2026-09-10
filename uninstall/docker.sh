@@ -7,7 +7,7 @@
 set -uo pipefail
 
 sudo systemctl disable --now docker docker.socket containerd 2>/dev/null || true
-sudo apt-get remove -y docker-ce docker-ce-cli containerd.io \
+sudo apt-get purge -y docker-ce docker-ce-cli containerd.io \
   docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras 2>/dev/null || true
 sudo rm -f /etc/apt/sources.list.d/docker.list /etc/apt/keyrings/docker.gpg
 sudo gpasswd -d "$USER" docker 2>/dev/null || true

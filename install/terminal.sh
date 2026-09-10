@@ -31,11 +31,14 @@ if ! command -v alacritty &>/dev/null; then
 fi
 
 # --- Nerd Font -------------------------------------------------------------
-# omabuntu ships the CaskaydiaMono Nerd Font via this apt package.
+# The `fonts-cascadia-mono-nf` apt package only exists on Ubuntu 25.10+;
+# older releases fall back to the nerd-fonts release zip.
 if ! fc-list | grep -qi "CaskaydiaMono Nerd Font"; then
   echo "Installing CaskaydiaMono Nerd Font..."
-  if ! sudo apt-get install -y fonts-cascadia-mono-nf; then
-    echo "apt package not available, downloading the font release instead..."
+  if apt-cache policy fonts-cascadia-mono-nf 2>/dev/null | grep -qE 'Candidate: [^(]'; then
+    sudo apt-get install -y fonts-cascadia-mono-nf
+  else
+    echo "No apt package for this Ubuntu; downloading the font release instead..."
     tmp="$(mktemp -d)"
     curl -fsSL -o "$tmp/CascadiaMono.zip" \
       https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaMono.zip

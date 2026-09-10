@@ -13,8 +13,6 @@ if [[ ! -x "$HOME/.proto/bin/proto" ]] && ! command -v proto &>/dev/null; then
   sudo apt-get update -y
   sudo apt-get install -y unzip xz-utils
   # The installer ends with an interactive "which shell profile?" menu.
-  # fetch_and_run keeps stdin on the terminal so you can answer it.
-  # Installs to ~/.proto.
   fetch_and_run https://moonrepo.dev/install/proto.sh
 fi
 

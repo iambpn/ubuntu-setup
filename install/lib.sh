@@ -1,25 +1,15 @@
 #!/bin/bash
 
-# Shared helpers for the install/ scripts. Source it near the top:
+# Shared helpers for the install/ scripts.
 #   source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
-#
-# This file only defines functions; it does not change shell options.
 
-# Fetch a remote install script and run it from a real file.
+# Run a remote install script from a file, not `curl URL | bash`, so its
+# interactive prompts still reach the terminal. Cleans up the temp file and
+# returns the script's real exit code.
 #
-# Why not `curl URL | bash`: piping makes the downloaded script's stdin the
-# pipe, so anything it tries to read from you (a "which shell profile?"
-# menu, a yes/no prompt) gets EOF and either hangs or silently picks
-# nothing. Running from a file leaves stdin on the terminal, so prompts
-# work and the install won't get stuck halfway through install.sh.
-#
-# The temp file is always removed, and the real exit code is returned, so a
-# caller with `set -e` still stops on a failed download or a failed script.
-#
-# Usage:
-#   fetch_and_run [--sudo] [--sh] <url> [args passed to the script...]
-#     --sudo  run the downloaded script as root
-#     --sh    run it with sh instead of bash (match a #!/bin/sh installer)
+# Usage: fetch_and_run [--sudo] [--sh] <url> [script args...]
+#   --sudo  run it as root
+#   --sh    run it with sh, not bash (for a #!/bin/sh installer)
 fetch_and_run() {
   local runner=(bash) use_sudo=0
 
