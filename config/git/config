@@ -1,0 +1,27 @@
+# Symlinked to ~/.gitconfig by install/git.sh. Git ignores
+# ~/.config/git/config when ~/.gitconfig exists, so this lives at ~/.gitconfig.
+
+[init]
+	defaultBranch = main
+
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	undo = reset --soft HEAD^
+	brr = branch --sort=-committerdate
+	config-setup-email = config user.email "bopon.maharjan@gmail.com"
+	config-setup-name = config user.name "'Bipin Maharjan'"
+
+[pull]
+	rebase = false
+
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only --features=interactive
+
+[delta]
+	line-numbers = true

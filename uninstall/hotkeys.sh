@@ -39,6 +39,9 @@ done
 # Restore the Super+V message-tray binding that hotkeys.sh cleared.
 gsettings reset org.gnome.shell.keybindings toggle-message-tray 2>/dev/null || true
 
+# Restore the default dash pinned apps.
+gsettings reset org.gnome.shell favorite-apps 2>/dev/null || true
+
 gsettings reset org.gnome.desktop.interface enable-hot-corners 2>/dev/null || true
 gsettings reset org.gnome.mutter dynamic-workspaces 2>/dev/null || true
 gsettings reset org.gnome.desktop.wm.preferences num-workspaces 2>/dev/null || true

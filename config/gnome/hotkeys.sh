@@ -61,6 +61,20 @@ gsettings set $WM switch-group "@as []"
 gsettings set $WM switch-group-backward "@as []"
 gsettings set $WM switch-input-source "@as []"
 
+# --- Dash / dock pinned apps ----------------------------------------
+# The exact set and order shown in the dash. btop.desktop and
+# lazydocker.desktop are the launchers install/tui-apps.sh creates.
+gsettings set org.gnome.shell favorite-apps "[
+  'app.zen_browser.zen.desktop',
+  'code.desktop',
+  'Alacritty.desktop',
+  'btop.desktop',
+  'lazydocker.desktop',
+  'org.gnome.Nautilus.desktop',
+  'google-chrome.desktop',
+  'org.gnome.Settings.desktop'
+]"
+
 # --- Workspaces and desktop behaviour --------------------------------
 gsettings set org.gnome.desktop.interface enable-hot-corners true
 gsettings set org.gnome.mutter dynamic-workspaces false

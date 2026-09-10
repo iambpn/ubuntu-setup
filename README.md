@@ -11,8 +11,8 @@ adapted from [omabuntu](../omabuntu).
   that is already done. You can run any of them on their own.
 - `uninstall.sh` / `uninstall/` — the reverse, one script per tool.
 - `config/` — the actual config files (Alacritty, Zellij, Starship, the
-  bash rc snippet, GNOME extensions and shortcuts). The install scripts
-  symlink or apply these.
+  bash rc snippet, git config, proto's `.prototools`, GNOME extensions and
+  shortcuts). The install scripts symlink or apply these.
 
 ## Usage
 

@@ -19,7 +19,7 @@ fi
 
 for script in hotkeys gnome-extensions flameshot pufferfish \
               vscode chrome docker proto lazydocker tui-apps flatpak-apps localsend \
-              shell terminal; do
+              git shell terminal; do
   echo
   echo "### uninstall/$script.sh"
   bash "$UNINSTALL_DIR/$script.sh"

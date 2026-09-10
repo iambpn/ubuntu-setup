@@ -14,6 +14,7 @@ scripts=(
   prerequisites.sh
   terminal.sh
   shell.sh
+  git.sh
   vscode.sh
   chrome.sh
   docker.sh
