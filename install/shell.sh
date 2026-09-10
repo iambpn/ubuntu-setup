@@ -2,8 +2,8 @@
 
 # Starship prompt, ported from omabuntu (config/starship.toml + its bash
 # init). Gives a minimal prompt: path + git only, no user@host. Starship
-# also sets the terminal title to the path, so Zellij pane titles / tabs
-# read "~" instead of "user@host: ~/path".
+# replaces PS1 and does not set a terminal title, so config/shell/rc.bash
+# emits the CWD as the title itself to keep Zellij pane names useful.
 
 set -eEo pipefail
 
