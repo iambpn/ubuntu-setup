@@ -16,6 +16,15 @@ adapted from [omabuntu](../omabuntu).
 
 ## Usage
 
+Clone this repo into `$HOME/.ubuntu-setup`:
+
+```sh
+git clone <repo-url> "$HOME/.ubuntu-setup"
+cd "$HOME/.ubuntu-setup"
+```
+
+Then run:
+
 ```sh
 sudo -v && ./install.sh
 ```
