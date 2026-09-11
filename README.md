@@ -65,7 +65,8 @@ After a clean run, on top of the base Ubuntu install you'll have:
   opens them in a terminal window.
 - **GNOME tweaks**: Hide Top Bar and TopHat extensions, Flameshot
   (Super+Shift+S) and Pufferfish clipboard history (Super+V) with their
-  keyboard shortcuts wired up, and Zen Browser pinned to the dash.
+  keyboard shortcuts wired up, Zen Browser pinned to the dash, and the top
+  bar clock set to show weekday and date (e.g. "Fri Sep 11 11:04 PM").
 
 Nothing here is destructive to unrelated system state — each script only
 touches the files and settings it owns, and backs up any real config file

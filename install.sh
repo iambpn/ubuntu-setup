@@ -27,6 +27,7 @@ scripts=(
   lazydocker.sh
   tui-apps.sh
   gnome-extensions.sh
+  clock.sh
   flatpak-apps.sh
   flameshot.sh
   pufferfish.sh
