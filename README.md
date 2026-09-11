@@ -45,3 +45,29 @@ To remove things again:
 ```sh
 ./uninstall.sh
 ```
+
+## What to expect
+
+After a clean run, on top of the base Ubuntu install you'll have:
+
+- **Terminal**: Alacritty + Zellij, Tokyo Night theme, CaskaydiaMono Nerd
+  Font, Starship prompt (path + git only, no user@host).
+- **Shell**: a `config/shell/rc.bash` snippet sourced from `~/.bashrc`,
+  which also sets the terminal title so Zellij pane names stay useful.
+- **Git**: your global `~/.gitconfig` in place, with `delta` as the diff
+  pager.
+- **Dev tools**: VS Code, Docker Engine + Buildx + Compose (your user added
+  to the `docker` group), `proto` (moonrepo's toolchain manager), and
+  `lazydocker`.
+- **Apps**: Google Chrome, LocalSend, and Flatpak apps from Flathub (Zen
+  Browser, Flatseal, PortProton).
+- **TUI tools**: `btop` and `lazygit`, each with an app-grid launcher that
+  opens them in a terminal window.
+- **GNOME tweaks**: Hide Top Bar and TopHat extensions, Flameshot
+  (Super+Shift+S) and Pufferfish clipboard history (Super+V) with their
+  keyboard shortcuts wired up, and Zen Browser pinned to the dash.
+
+Nothing here is destructive to unrelated system state — each script only
+touches the files and settings it owns, and backs up any real config file
+it would otherwise overwrite. Log out and back in once it's done so the
+Docker group, GNOME extension, and shell profile changes take effect.

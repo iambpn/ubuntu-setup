@@ -38,6 +38,9 @@ set_key() {
 # --- TopHat -------------------------------------------------------------
 tophat=org.gnome.shell.extensions.tophat
 if has_schema "$tophat"; then
+  # Disable the icon
+  set_key "$tophat" show-icon false
+
   # CPU as a percentage, memory as used GB, and the network meter on.
   set_key "$tophat" show-cpu true
   set_key "$tophat" cpu-display 'numeric'
@@ -59,8 +62,8 @@ if has_schema "$hidetopbar"; then
 
   # Sensitivity: reveal the panel on a mouse push to the top edge, keep the hot
   # corner alive while hidden, keep round corners, but don't open the overview.
-  set_key "$hidetopbar" mouse-sensitive true
-  set_key "$hidetopbar" mouse-sensitive-fullscreen-window false
+  set_key "$hidetopbar" mouse-sensitive false
+  set_key "$hidetopbar" mouse-sensitive-fullscreen-window true
   set_key "$hidetopbar" show-in-overview true
   set_key "$hidetopbar" hot-corner true
   set_key "$hidetopbar" mouse-triggers-overview false
