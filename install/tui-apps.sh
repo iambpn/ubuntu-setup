@@ -11,8 +11,11 @@ ICONS="$APPS/icons"
 mkdir -p "$ICONS"
 
 # --- btop (apt) --------------------------------------------------------
-sudo apt-get update -y
-sudo apt-get install -y btop
+if ! command -v btop &>/dev/null; then
+  echo "Installing btop..."
+  sudo apt-get update -y
+  sudo apt-get install -y btop
+fi
 
 # Theme: Tokyo Night. btop ships this theme, so we only set the key in its
 # config (creating the file if btop hasn't run yet). btop rewrites this file

@@ -1,8 +1,12 @@
 #!/bin/bash
 
 # Run every script under install/ to set up a fresh Ubuntu machine.
-# Ordering matters in a couple of places (docker before lazydocker, the
-# lazy-* tools before the launcher script), so the list is explicit.
+# Ordering matters in a couple of places, so the list is explicit:
+#   - docker before lazydocker, and the lazy-* tools before tui-apps.sh
+#     (the launcher script)
+#   - flatpak-apps.sh (installs Zen Browser) before flameshot.sh /
+#     pufferfish.sh, since both run config/gnome/hotkeys.sh, which pins
+#     Zen Browser to the GNOME dash
 #
 # Safe to re-run: each install/ script skips work that is already done.
 
@@ -22,9 +26,9 @@ scripts=(
   lazydocker.sh
   tui-apps.sh
   gnome-extensions.sh
+  flatpak-apps.sh
   flameshot.sh
   pufferfish.sh
-  flatpak-apps.sh
   localsend.sh
 )
 
