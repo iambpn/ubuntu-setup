@@ -31,6 +31,7 @@ scripts=(
   flatpak-apps.sh
   flameshot.sh
   pufferfish.sh
+  workspace-toggle.sh
   localsend.sh
 )
 

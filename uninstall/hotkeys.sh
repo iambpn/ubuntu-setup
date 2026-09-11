@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Revert config/gnome/hotkeys.sh: reset the keybindings it changed and drop
-# the pufferfish / flameshot custom shortcuts, leaving any other custom
-# shortcuts you have in place.
+# the pufferfish / flameshot / workspace-toggle custom shortcuts, leaving
+# any other custom shortcuts you have in place.
 
 set -uo pipefail # not -e: keep cleaning up past any one failure
 
@@ -50,7 +50,7 @@ gsettings reset org.gnome.mutter workspaces-only-on-primary 2>/dev/null || true
 MK="org.gnome.settings-daemon.plugins.media-keys"
 CB="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
 gsettings reset "$MK" logout 2>/dev/null || true
-for slot in pufferfish flameshot; do
+for slot in pufferfish flameshot workspace-toggle; do
   array_remove "$MK" custom-keybindings "$CB/$slot/"
   dconf reset -f "$CB/$slot/" 2>/dev/null || true
 done

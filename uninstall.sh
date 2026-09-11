@@ -17,7 +17,7 @@ if [[ ${1:-} != "-y" && ${1:-} != "--yes" ]]; then
   [[ ${ans,,} == y || ${ans,,} == yes ]] || { echo "Aborted."; exit 0; }
 fi
 
-for script in hotkeys gnome-extensions clock flameshot pufferfish \
+for script in hotkeys gnome-extensions clock flameshot pufferfish workspace-toggle \
               vscode chrome docker ufw-docker proto lazydocker tui-apps flatpak-apps localsend \
               git shell terminal; do
   echo

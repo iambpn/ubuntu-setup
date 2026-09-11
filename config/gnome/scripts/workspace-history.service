@@ -1,0 +1,9 @@
+[Unit]
+Description=Track the previously active GNOME workspace, for the Super+` toggle
+
+[Service]
+ExecStart=__DAEMON_PATH__
+Restart=always
+
+[Install]
+WantedBy=default.target

@@ -2,11 +2,12 @@
 
 # GNOME keyboard shortcuts. Split out like config/gnome/extensions.sh so the
 # bindings are easy to tweak and re-apply. The install scripts that need a
-# shortcut (pufferfish, flameshot) run this at the end; you can also run it
-# on its own.
+# shortcut (pufferfish, flameshot, workspace-toggle) run this at the end; you
+# can also run it on its own.
 
 set -eEo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MEDIA_KEYS="org.gnome.settings-daemon.plugins.media-keys"
 CUSTOM_BASE="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
 
@@ -40,6 +41,11 @@ gsettings set org.gnome.shell.keybindings toggle-message-tray "['<Super>m']"
 
 add_custom_shortcut pufferfish 'Pufferfish' 'pufferfish --history' '<Super>v'
 add_custom_shortcut flameshot 'Flameshot' 'flameshot gui' '<Shift><Super>s'
+
+# Jump back to the workspace you were on before the current one. Backed by
+# the workspace-history systemd --user service (see install/workspace-toggle.sh).
+add_custom_shortcut workspace-toggle 'Toggle Previous Workspace' \
+  "$SCRIPT_DIR/scripts/workspace-toggle.sh" '<Super>grave'
 
 # --- Window manager ---------------------------------------------------
 WM="org.gnome.desktop.wm.keybindings"
