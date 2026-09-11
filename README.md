@@ -51,7 +51,8 @@ To remove things again:
 After a clean run, on top of the base Ubuntu install you'll have:
 
 - **Terminal**: Alacritty + Zellij, Tokyo Night theme, CaskaydiaMono Nerd
-  Font, Starship prompt (path + git only, no user@host).
+  Font (JetBrainsMono Nerd Font also installed), Starship prompt (path +
+  git only, no user@host).
 - **Shell**: a `config/shell/rc.bash` snippet sourced from `~/.bashrc`,
   which also sets the terminal title so Zellij pane names stay useful.
 - **Git**: your global `~/.gitconfig` in place, with `delta` as the diff

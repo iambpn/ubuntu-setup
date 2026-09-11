@@ -2,7 +2,7 @@
 
 # Revert install/terminal.sh: unlink the configs (restoring any .bak the
 # installer made), then remove Alacritty, Zellij, wl-clipboard, and the
-# Nerd Font.
+# Nerd Fonts.
 
 set -uo pipefail
 
@@ -25,6 +25,7 @@ sudo apt-get remove -y wl-clipboard 2>/dev/null || true
 
 sudo apt-get remove -y fonts-cascadia-mono-nf 2>/dev/null || true
 rm -rf "$HOME/.local/share/fonts/CaskaydiaMono"
+rm -rf "$HOME/.local/share/fonts/JetBrainsMono"
 fc-cache -f >/dev/null 2>&1 || true
 
 echo "Terminal setup reverted."

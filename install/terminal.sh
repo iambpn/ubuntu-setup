@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Terminal setup copied from omabuntu: Alacritty + Zellij, Tokyo Night look,
-# CaskaydiaMono Nerd Font. Framework references from omabuntu are stripped,
-# so this stands alone.
+# CaskaydiaMono Nerd Font (also installs JetBrainsMono Nerd Font). Framework
+# references from omabuntu are stripped, so this stands alone.
 
 set -eEo pipefail
 
@@ -33,6 +33,20 @@ if ! fc-list | grep -qi "CaskaydiaMono Nerd Font"; then
     unzip -o "$tmp/CascadiaMono.zip" -d "$HOME/.local/share/fonts/CaskaydiaMono" >/dev/null
     rm -rf "$tmp"
   fi
+  fc-cache -f >/dev/null
+fi
+
+# --- JetBrains Mono Nerd Font -----------------------------------------------
+# No apt package ships the Nerd Font patched version, so always pull the
+# release zip.
+if ! fc-list | grep -qi "JetBrainsMono Nerd Font"; then
+  echo "Installing JetBrainsMono Nerd Font..."
+  tmp="$(mktemp -d)"
+  curl -fsSL -o "$tmp/JetBrainsMono.zip" \
+    https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+  mkdir -p "$HOME/.local/share/fonts"
+  unzip -o "$tmp/JetBrainsMono.zip" -d "$HOME/.local/share/fonts/JetBrainsMono" >/dev/null
+  rm -rf "$tmp"
   fc-cache -f >/dev/null
 fi
 
