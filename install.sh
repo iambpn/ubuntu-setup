@@ -22,6 +22,7 @@ scripts=(
   vscode.sh
   chrome.sh
   docker.sh
+  ufw-docker.sh
   proto.sh
   lazydocker.sh
   tui-apps.sh

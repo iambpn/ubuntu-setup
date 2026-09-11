@@ -18,7 +18,7 @@ if [[ ${1:-} != "-y" && ${1:-} != "--yes" ]]; then
 fi
 
 for script in hotkeys gnome-extensions flameshot pufferfish \
-              vscode chrome docker proto lazydocker tui-apps flatpak-apps localsend \
+              vscode chrome docker ufw-docker proto lazydocker tui-apps flatpak-apps localsend \
               git shell terminal; do
   echo
   echo "### uninstall/$script.sh"
