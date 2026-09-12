@@ -47,6 +47,12 @@ add_custom_shortcut flameshot 'Flameshot' 'flameshot gui' '<Shift><Super>s'
 add_custom_shortcut workspace-toggle 'Toggle Previous Workspace' \
   "$SCRIPT_DIR/scripts/workspace-toggle.sh" '<Super>grave'
 
+# Enable/disable the Hide Top Bar extension outright, instead of using its
+# own shortcut-keybind setting (that only shows the bar temporarily, it
+# doesn't give a plain on/off).
+add_custom_shortcut hidetopbar-toggle 'Toggle Hide Top Bar' \
+  "$SCRIPT_DIR/scripts/hidetopbar-toggle.sh" '<Shift><Super>h'
+
 # --- Window manager ---------------------------------------------------
 WM="org.gnome.desktop.wm.keybindings"
 gsettings set $WM cycle-windows "['<Super>Tab']"
