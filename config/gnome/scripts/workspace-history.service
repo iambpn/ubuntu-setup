@@ -1,9 +1,16 @@
 [Unit]
 Description=Track the previously active GNOME workspace, for the Super+` toggle
+# Must start after gnome-session reaches graphical-session.target: that's
+# when DISPLAY/WAYLAND_DISPLAY/XAUTHORITY get imported into the systemd
+# --user environment, which wmctrl (used by the daemon) needs to work.
+# WantedBy=default.target started this too early, before those vars
+# existed, and Restart=always just kept relaunching it without them.
+After=graphical-session.target
+PartOf=graphical-session.target
 
 [Service]
 ExecStart=__DAEMON_PATH__
 Restart=always
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
