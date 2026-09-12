@@ -2,6 +2,8 @@
 # proto rewrites that file as tools are installed, so it's a copy, not a
 # symlink. Edit this only to change the starting point for a fresh machine.
 
+npm = "bundled"
+
 # enable bundled npm to be used with node
 [tools.node]
 bundled-npm = true
