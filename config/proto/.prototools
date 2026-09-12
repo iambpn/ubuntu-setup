@@ -1,3 +1,4 @@
+
 # Copied to ~/.proto/.prototools (proto's global config) by install/proto.sh.
 # proto rewrites that file as tools are installed, so it's a copy, not a
 # symlink. Edit this only to change the starting point for a fresh machine.
