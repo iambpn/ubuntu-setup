@@ -24,6 +24,13 @@ if ! command -v ydotool &>/dev/null; then
 fi
 systemctl --user enable --now ydotoold 2>/dev/null || true
 
+# ydotool's udev rule locks /dev/uinput to the "input" group, so ydotoold
+# can't inject the paste keystroke unless the user is in that group.
+if ! id -nG "$USER" | tr ' ' '\n' | grep -qx input; then
+  sudo usermod -aG input "$USER"
+  echo "Added $USER to the input group. Log out and back in for it to apply."
+fi
+
 # --- Shortcut ---------------------------------------------------------
 bash "$REPO_DIR/config/gnome/hotkeys.sh"
 
