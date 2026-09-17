@@ -49,6 +49,7 @@ if has_schema "$tophat"; then
   set_key "$tophat" mem-abs-units true
   set_key "$tophat" show-net true
   set_key "$tophat" network-usage-unit 'bytes'
+  set_key "$tophat" show-fs false
 else
   echo "TopHat schema not installed yet; skipping its settings."
 fi
