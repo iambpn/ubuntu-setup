@@ -56,7 +56,9 @@ After a clean run, on top of the base Ubuntu install you'll have:
 - **Shell**: a `config/shell/rc.bash` snippet sourced from `~/.bashrc`,
   which also sets the terminal title so Zellij pane names stay useful.
 - **Git**: your global `~/.gitconfig` in place, with `delta` as the diff
-  pager.
+  pager. New Git worktrees copy `.env` from the main worktree. For bare
+  repositories, `.env` is taken from the bare repository first, then the
+  first registered worktree that contains it.
 - **Dev tools**: VS Code, Docker Engine + Buildx + Compose (your user added
   to the `docker` group), `proto` (moonrepo's toolchain manager), and
   `lazydocker`.

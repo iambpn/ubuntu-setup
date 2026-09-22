@@ -38,5 +38,17 @@ fi
 ln -snf "$src" "$dst"
 echo "Linked $dst -> $src"
 
+# Use one global hook directory so worktree creation can copy a repository's
+# local .env without adding the hook separately to every repository.
+hooks_src="$REPO_DIR/config/git/hooks"
+hooks_dst="$HOME/.config/git/hooks"
+mkdir -p "$(dirname "$hooks_dst")"
+if [[ -e $hooks_dst && ! -L $hooks_dst ]]; then
+  echo "Backing up existing $hooks_dst -> $hooks_dst.bak"
+  mv "$hooks_dst" "$hooks_dst.bak"
+fi
+ln -snf "$hooks_src" "$hooks_dst"
+echo "Linked $hooks_dst -> $hooks_src"
+
 echo "Git config linked. Set your identity with:"
 echo "  git config-setup-name && git config-setup-email"
