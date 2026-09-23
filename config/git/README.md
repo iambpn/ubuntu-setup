@@ -3,6 +3,9 @@
 `install/git.sh` links this configuration to `~/.gitconfig` and the `hooks/`
 directory to `~/.config/git/hooks`.
 
+`hooks/post-checkout` handles the worktree creation check. It runs
+`hooks/post-checkout.d/copy-env.sh` for every new worktree.
+
 ## Worktree `.env` hook
 
 The `hooks/post-checkout` hook copies `.env` into a newly created worktree.
