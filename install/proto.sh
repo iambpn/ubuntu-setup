@@ -31,4 +31,10 @@ else
   echo "Copied $src -> $dst"
 fi
 
+# --- Shared npm globals ---------------------------------------------
+# With shared-globals-dir, npm's prefix is ~/.proto/tools/node/globals.
+# npm only creates its lib/ on the first `npm install -g`, and until then
+# npx fails with "ENOENT: lstat .../globals/lib". Create it up front.
+mkdir -p "$HOME/.proto/tools/node/globals/lib"
+
 echo "proto installed. Open a new shell to pick it up."
