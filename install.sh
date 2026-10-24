@@ -28,6 +28,7 @@ scripts=(
   tui-apps.sh
   gnome-extensions.sh
   clock.sh
+  privacy.sh
   flatpak-apps.sh
   flameshot.sh
   pufferfish.sh
