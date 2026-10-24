@@ -38,8 +38,8 @@ set_key() {
 # --- TopHat -------------------------------------------------------------
 tophat=org.gnome.shell.extensions.tophat
 if has_schema "$tophat"; then
-  # Disable the icon
-  set_key "$tophat" show-icon false
+  # Hide the icons beside the meters.
+  set_key "$tophat" show-icons false
 
   # CPU as a percentage, memory as used GB, and the network meter on.
   set_key "$tophat" show-cpu true
